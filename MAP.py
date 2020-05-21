@@ -16,4 +16,3 @@ directions_result = gmaps.directions("Sydney Town Hall",
                                      mode="transit",
                                      departure_time=now)
 print(directions_result)
-print('hi')
