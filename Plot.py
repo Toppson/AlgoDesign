@@ -1,8 +1,19 @@
 import plotly.graph_objs as go
 import plotly.offline as ply
-x=[1,2,3,4,5]
-y=[1,2,3,4,5]
+from Information_extraction import dictt,newtext
+words=newtext.split()
+new=[a for a in words]
+x=[]
+y=[]
 
+for i in dictt:
+    x.append(i)
+
+for j in dictt:
+    y.append(dictt[j])
+
+print('x =',x)
+print('y =',y)
 graph1=go.Scatter(
     x=x,
     y=y,
@@ -15,14 +26,14 @@ graph2=go.Scatter(
     mode='markers'
 )
 graph3=go.Histogram(
-    x=x,
+    x=new,
     name='histogram',
-    nbinsx=max(x)
+    nbinsx=50
 )
 data=[graph1,graph2,graph3]
 layout=go.Layout(title={'text':'Graph Frequency vs Word Count','x':0.5},
-                 xaxis=dict(title='Word Count'),
-                 yaxis=dict(title='Frequency'))
+                 xaxis=dict(title='Word '),
+                 yaxis=dict(title='Frequency/count'))
 fig=dict(data=data,layout=layout)
 ply.plot(fig,filename='graph.html')
 
