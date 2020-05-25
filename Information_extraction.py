@@ -3,6 +3,8 @@ import bs4
 import string
 import re
 
+import nltk
+
 modified_punctuation=string.punctuation
 modified_punctuation=modified_punctuation.replace('\'','')
 
@@ -43,6 +45,7 @@ for i in text_list:
 #different library different size of stopwords
 #download stopwords via nltk, go google
 from nltk.corpus import stopwords
+#nltk.download('stopwords') add this line to download
 all_stopwords=stopwords.words('english')
 all_stopwords.append('has')
 print("Stopword:", all_stopwords)
