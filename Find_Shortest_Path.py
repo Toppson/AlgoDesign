@@ -1,9 +1,8 @@
 import sys
-
+from Getlocation import fullcoordinatex,fullcoordinatey
 class Graph():
 
     def __init__(self, nodes):
-        self.N = nodes
         self.distances = {}
         self.path = []
         # create a empty dictionary with refer to each node
@@ -12,7 +11,8 @@ class Graph():
         print(self.distances)
 
     def shortestPath(self):
-        print('The shortest path is', self.path[self.N-1])
+        print('The shortest path is', se
+        self.N = nodeslf.path[self.N-1])
 
     def distanceNode_Node(self):
         print('Distance from node to node:\n', self.distances, '\n')
@@ -76,6 +76,12 @@ class Graph():
 # a.distanceNode_Node()
 # a.search()
 # a.shortestPath()
+distance=[]
+temp=[]
+for i in len(fullcoordinatex):
+    for k in len(fullcoordinatex[i]) - 1:
+        distance(fullcoordinatex[i][k],fullcoordinatey[i][k],fullcoordinatex[i][k+1],fullcoordinatey[i][k+1])
+
 
 b = Graph(7)
 b.addDistance(1,2,4)
