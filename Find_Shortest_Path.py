@@ -23,13 +23,11 @@ class Graph():
         print(self.dictionary)
 
     def shortestPath(self):
-        print('The shortest path is', self.path[self.N - 1])
-        print('The distance is', self.shortest_distance)
         to_return = []
         listOfItems = list(self.dictionary.items())
         for i in self.path[self.N - 1]:
             to_return.append(listOfItems[i][0])
-        return to_return
+        return to_return, self.shortest_distance
 
     def distanceNode_Node(self):
         # print('Distance from node to node:\n', self.distances, '\n')
@@ -37,7 +35,7 @@ class Graph():
         for i in self.distances.keys():
             print("From", i, end="")
             for n in self.distances[i].keys():
-                print(" to ", n ,"with",self.distances[i][n])
+                print(" to", n ,"with",self.distances[i][n])
 
 
     def addDistance(self, From, To, distance):
@@ -87,8 +85,6 @@ class Graph():
         self.path = path
         end_index = self.dictionary[self.end]
         self.shortest_distance = distanceSet[end_index]
-        print('Path:\n',path)
-        print('Shortest distance to each node:\n',distanceSet,'\n')
         # print(path)
 
 # a = Graph(5)

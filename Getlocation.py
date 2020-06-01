@@ -83,34 +83,33 @@ for i in range(len(fullcoordinate_distance)):
 print(graph.distanceNode_Node())
 
 graph.search()
-best_coor = graph.shortestPath()
-print(best_coor)
+best_coor, shortest_distance = graph.shortestPath()
 best_coorx = []
 best_coory = []
 for i in best_coor:
     a = i.split(",")
     best_coorx.append(float(a[0]))
     best_coory.append(float(a[1]))
-print(best_coorx)
-print(best_coory)
+print("The shortest distance is ",shortest_distance)
+# gmap2.plot(best_coorx, best_coory, "cornflowerblue", edge_width=6)
 
-gmap2.plot(best_coorx, best_coory, "cornflowerblue", edge_width=6)
-
-def minRoute(distance,route):
-    choose=distance[0]
-    best=0
-    for i in range(len(distance)):
-        if distance[i]<choose:
-            choose=distance[i]
-            road=route[i]
-            best=i
-    print("Shortest path=",road,"(",choose,"km )")
+def minRoute(distance,shortest_distance,route):
+    closest_choose = distance[0] - shortest_distance
+    print(closest_choose)
+    best = 0
+    for i in range(1,len(distance)):
+        compare = distance[i] - shortest_distance
+        if compare > 0 and compare < closest_choose:
+            closest_choose = compare
+            road = route[i]
+            best = i
+    print("Shortest path =\n", road, "(", shortest_distance, "km )")
     data1 = open("options/" + files[best], 'r').read().replace("\n", "")
     strr1 = ' '.join(data1.split())
     strr1 = strr1.replace(" ", "&")
     coor1 = strr1.split("&")
-    bestcoorx=[]
-    bestcoory=[]
+    bestcoorx = []
+    bestcoory = []
     for (ind, i) in enumerate(coor1, 0):
         temp = i.split(',')
         bestcoory.append(float(temp[0]))
@@ -118,9 +117,10 @@ def minRoute(distance,route):
     gmap1.plot(bestcoorx, bestcoory, "cornflowerblue", edge_width=6)
 
 for (ind,f) in enumerate (files,1):
-    print("Option ",ind," (",colors[ind-1],") = ",f.split('.')[0], "-",distance[ind-1] ,"km")
+    # print("Option ",ind," (",colors[ind-1],") = ",f.split('.')[0], "-",distance[ind-1] ,"km")
+    print("Option ",ind," (",colors[ind-1],") = ",f.split('.')[0])
     route.append(f.split('.')[0])
-minRoute(distance,route)
+minRoute(distance,shortest_distance,route)
 
 # //find shortest distance and show graph
 
@@ -133,9 +133,9 @@ gmap1.draw("best.html")
 url1 = "best.html"
 webbrowser.open(url1)
 
-gmap2.draw("sp.html")
-url2 = "sp.html"
-webbrowser.open(url2)
+# gmap2.draw("sp.html")
+# url2 = "sp.html"
+# webbrowser.open(url2)
 
 
 #    distance.append(temp)
