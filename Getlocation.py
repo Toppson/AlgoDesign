@@ -115,7 +115,6 @@ def minRoute(distance,route):
         temp = i.split(',')
         bestcoory.append(float(temp[0]))
         bestcoorx.append(float(temp[1]))
-        print("(",temp[0],",",temp[1],")")
     gmap1.plot(bestcoorx, bestcoory, "cornflowerblue", edge_width=6)
 
 for (ind,f) in enumerate (files,1):
