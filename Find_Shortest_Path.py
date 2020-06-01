@@ -1,30 +1,55 @@
 import sys
-from Getlocation import fullcoordinatex,fullcoordinatey
 class Graph():
 
-    def __init__(self, nodes):
-        self.distances = {}
+    def __init__(self, nodes, start, end):
+        self.N = len(nodes)
+        self.distances = {} # distance From to To (each node)
+        self.dictionary = {} # map the direction as int nodes
         self.path = []
+        self.shortest_distance = 0
+        self.start = start
+        self.end = end
+        mylist = [start]
+        nodes.remove(start)
+        for i in nodes:
+            if i != end:
+                mylist.append(i)
+        mylist.append(end)
         # create a empty dictionary with refer to each node
-        for i in range(nodes):
-            self.distances[i+1] = {}
+        for i in range(len(mylist)):
+            self.distances[i] = {}
+            self.dictionary[mylist[i]] = i
         print(self.distances)
+        print(self.dictionary)
 
     def shortestPath(self):
-        print('The shortest path is', se
-        self.N = nodeslf.path[self.N-1])
+        print('The shortest path is', self.path[self.N - 1])
+        print('The distance is', self.shortest_distance)
+        to_return = []
+        listOfItems = list(self.dictionary.items())
+        for i in self.path[self.N - 1]:
+            to_return.append(listOfItems[i][0])
+        return to_return
 
     def distanceNode_Node(self):
-        print('Distance from node to node:\n', self.distances, '\n')
+        # print('Distance from node to node:\n', self.distances, '\n')
+        print('Distance from node to node:\n')
+        for i in self.distances.keys():
+            print("From", i, end="")
+            for n in self.distances[i].keys():
+                print(" to ", n ,"with",self.distances[i][n])
+
 
     def addDistance(self, From, To, distance):
         # add into the distance to the respective node
-        if(From != To):
-            self.distances[From][To] = distance
+        from_index = self.dictionary[From]
+        to_index = self.dictionary[To]
+        self.distances[from_index][to_index] = distance
 
     def minDistance(self, distanceSet, sptSet):
         # finding the min distance index
         min = sys.maxsize
+        min_index = 0
         for i in range(self.N):
             if distanceSet[i] < min and sptSet[i] == False:
                 min = distanceSet[i]
@@ -44,26 +69,27 @@ class Graph():
         for i in range(self.N):
             u = self.minDistance(distanceSet, sptSet)
             if path[u] == []:
-                path[u].append(1)
+                path[u].append(0)
             else:
-                path[u].append(u+1)
-            if u+1 == self.N:
+                path[u].append(u)
+            if u + 1 == self.N:
                 break
             sptSet[u] = True
             # get from the distance from node to node
-            for j in self.distances[u+1]:
-                distance = self.distances[u+1][j]
-                if distanceSet[j-1] > distanceSet[u] + distance:
-                    distanceSet[j-1] = distanceSet[u] + distance
-                    if 1 in path[j-1] and 1 in path[u]:
-                        path[j-1].clear()
+            for j in self.distances[u]:
+                distance = float(self.distances[u][j])
+                if distanceSet[j] > distanceSet[u] + distance:
+                    distanceSet[j] = distanceSet[u] + distance
+                    if 0 in path[j] and 0 in path[u]:
+                        path[j].clear()
                     for n in path[u]:
-                        path[j-1].append(n)
-            print('Path:\n',path)
-            print('Shortest distance to each node:\n',distanceSet,'\n')
-
+                        path[j].append(n)
         self.path = path
-        print(path)
+        end_index = self.dictionary[self.end]
+        self.shortest_distance = distanceSet[end_index]
+        print('Path:\n',path)
+        print('Shortest distance to each node:\n',distanceSet,'\n')
+        # print(path)
 
 # a = Graph(5)
 # a.addDistance(1,2,50)
@@ -76,26 +102,26 @@ class Graph():
 # a.distanceNode_Node()
 # a.search()
 # a.shortestPath()
-distance=[]
-temp=[]
-for i in len(fullcoordinatex):
-    for k in len(fullcoordinatex[i]) - 1:
-        distance(fullcoordinatex[i][k],fullcoordinatey[i][k],fullcoordinatex[i][k+1],fullcoordinatey[i][k+1])
+# distance=[]
+# temp=[]
+# for i in len(fullcoordinatex):
+#     for k in len(fullcoordinatex[i]) - 1:
+#         distance(fullcoordinatex[i][k],fullcoordinatey[i][k],fullcoordinatex[i][k+1],fullcoordinatey[i][k+1])
 
 
-b = Graph(7)
-b.addDistance(1,2,4)
-b.addDistance(1,3,6)
-b.addDistance(1,4,5)
-b.addDistance(2,3,3)
-b.addDistance(2,5,7)
-b.addDistance(3,4,11)
-b.addDistance(3,5,8)
-b.addDistance(4,5,2)
-b.addDistance(4,6,10)
-b.addDistance(4,7,2)
-b.addDistance(5,6,5)
-b.addDistance(6,7,3)
-b.distanceNode_Node()
-b.search()
-b.shortestPath()
+# b = Graph(7)
+# b.addDistance(1,2,4)
+# b.addDistance(1,3,6)
+# b.addDistance(1,4,5)
+# b.addDistance(2,3,3)
+# b.addDistance(2,5,7)
+# b.addDistance(3,4,11)
+# b.addDistance(3,5,8)
+# b.addDistance(4,5,2)
+# b.addDistance(4,6,10)
+# b.addDistance(4,7,2)
+# b.addDistance(5,6,5)
+# b.addDistance(6,7,3)
+# b.distanceNode_Node()
+# b.search()
+# b.shortestPath()
