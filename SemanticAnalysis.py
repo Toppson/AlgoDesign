@@ -169,7 +169,7 @@ for i in range(len(links)):
 
 
 text=text.split()
-
+m=text
 for i in range(len(links)):
     text_links[i] = text_links[i].split()
 
@@ -415,7 +415,7 @@ def badCharSet(stringg,size):
 
     return badChar
 
-def boyer_moore(txt,pat,num):
+def boyer_moore(txt,pat):
     m=len(pat)
     n=len(txt)
     txt2=txt
@@ -444,7 +444,7 @@ def boyer_moore(txt,pat,num):
         if j < 0 and front_space==True and back_space==True:
             # print("Pattern occur at shift = {}".format(s))
             txt2=re.sub(" "+pat+" "," ",txt2)
-            num=num+1
+
             # s will shift to the next position where the pattern is matched
             s += (m - badChar[ord(txt[s + m])] if s + m < n else 1)
         else:
@@ -452,43 +452,21 @@ def boyer_moore(txt,pat,num):
             # s will shift to the next position by choosing 1 or the maximum shifting
             s += max(1, j - badChar[ord(txt[s + j])])
 
-    return txt2,num
+    return txt2
 
 
 # to compare each stopword to the text
-demo_dictionary_stopwords={}
 for i in all_stopwords:
-    demo_num = 0
-    newtext,num=boyer_moore(newtext,i,demo_num)
-    if demo_num>0:
-        demo_dictionary_stopwords[i]=demo_num
+    newtext=boyer_moore(newtext,i)
 
 print("Corrected text: ",newtext)
 
-dictionary_list_stopwords=[]
 for i in range(len(newtext_links)):
-    dictionary_stopwords={}
     for j in all_stopwords:
-        num=0
-        newtext_links[i],num=boyer_moore(newtext_links[i],j,num)
-        if num>0:
-            dictionary_stopwords[j]=num
-    dictionary_list_stopwords.append(dictionary_stopwords)
+        newtext_links[i]=boyer_moore(newtext_links[i],j)
 
-# print("Stopwords: ",dictionary_list_stopwords)
-# print("Length: ",len(dictionary_list_stopwords))
 
-total_stopwords=[]
-for i in range(len(dictionary_list_stopwords)):
-    sum=0
-    for j in dictionary_list_stopwords[i]:
-        sum=sum+dictionary_list_stopwords[i][j]
-    total_stopwords.append(sum)
-print("Sum: ",total_stopwords)
 newtext_list=newtext.split()
-
-
-
 
 newtext_list_links=[]
 for i in range(len(newtext_links)):
@@ -500,7 +478,6 @@ for i in newtext_list:
         dictt[i]=dictt[i]+1
     else:
         dictt[i]=1
-print(dictt)
 
 dictt_links=[]
 for i in range(len(newtext_list_links)):
@@ -513,10 +490,14 @@ for i in range(len(newtext_list_links)):
         else:
             dictt_links[i][j]=1
 
+
+
+
+print(dictt)
+
 for i in range(len(dictt_links)):
     print(dictt_links[i])
 
-#index
 #0,1,2 - bus
 #3,4,5 - ferry
 #6,7,8 - rail
@@ -527,3 +508,50 @@ for i in range(len(dictt_links)):
 print("\nBest Time Complexity of Boyer Moore: O(n/m)")
 print("Worst Time Complexity of Boyer Moore: O(mn)")
 print(("In this case, the time complexity would times m"))
+
+
+with open('pw.txt', 'r') as myfile:
+  data = myfile.read()
+data=data.lower()
+for i in string.punctuation:
+    if i!= "," and i in data:
+         data=data.replace(i,"")
+    if " " in data:
+        data=data.replace(" ","")
+data=data.split(",")
+
+with open('nw.txt', 'r') as file1:
+  file1 = file1.read()
+for i in string.punctuation:
+    if i!= "," and i in file1:
+         file1=file1.replace(i,"")
+    if "  " in file1:
+        file1=file1.replace("  ","")
+file1=file1.split(",")
+numofpw=0
+numofnw=0
+pswords=''
+ngwords=''
+
+for i in m:
+    if i in data:
+        numofpw+=1
+
+    elif i in file1:
+        numofnw+=1
+
+    else:
+        numofpw=numofpw
+        numofnw=numofnw
+
+print("Number of positive word=",numofpw)
+print("Number of negative words=",numofnw)
+#print("Positive words are:" + pswords)
+#print("Negative words are:" + ngwords)
+
+if numofpw>numofnw:
+    print("This is a positive sentiment")
+elif numofpw<numofnw:
+    print("This is a negative sentiment")
+else:
+    print("This is a neutral sentiment")
