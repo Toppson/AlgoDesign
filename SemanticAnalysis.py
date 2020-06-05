@@ -3,6 +3,7 @@ import urllib.request
 import bs4
 import string
 import re
+# from Information_Extraction import newtext_links
 
 modified_punctuation=string.punctuation
 modified_punctuation=modified_punctuation.replace('\'','')
@@ -169,7 +170,6 @@ for i in range(len(links)):
 
 
 text=text.split()
-m=text
 for i in range(len(links)):
     text_links[i] = text_links[i].split()
 
@@ -509,49 +509,123 @@ print("\nBest Time Complexity of Boyer Moore: O(n/m)")
 print("Worst Time Complexity of Boyer Moore: O(mn)")
 print(("In this case, the time complexity would times m"))
 
+# start from here
 
-with open('pw.txt', 'r') as myfile:
-  data = myfile.read()
+with open('pw.txt',encoding='utf-8',mode='r') as myfile:
+    data = myfile.read()
 data=data.lower()
+data=data.encode("ascii","ignore")
+data=data.decode()
+
 for i in string.punctuation:
     if i!= "," and i in data:
          data=data.replace(i,"")
-    if " " in data:
+    if "  " in data:
+        data=data.replace("  ","")
+    if "\n" in data:
         data=data.replace(" ","")
 data=data.split(",")
+# print(data)
 
-with open('nw.txt', 'r') as file1:
-  file1 = file1.read()
+with open('nw.txt', 'r',encoding="utf-8") as file1:
+    file1 = file1.read()
+    file1 = file1.encode("ascii", "ignore")
+    file1 = file1.decode()
 for i in string.punctuation:
     if i!= "," and i in file1:
          file1=file1.replace(i,"")
-    if "  " in file1:
-        file1=file1.replace("  ","")
+    if "    " in file1:
+        file1=file1.replace("    ","")
 file1=file1.split(",")
-numofpw=0
-numofnw=0
-pswords=''
-ngwords=''
+# print(file1)
+# print(type(data))
+# print(type(file1))
 
-for i in m:
-    if i in data:
-        numofpw+=1
+positiveword=[0]*len(text_list_links)
+negativeword=[0]*len(text_list_links)
+neutralword=[0]*len(text_list_links)
 
-    elif i in file1:
-        numofnw+=1
 
-    else:
-        numofpw=numofpw
-        numofnw=numofnw
+for i in range(len(text_list_links)):
+    for j in range(len(text_list_links[i])):
 
-print("Number of positive word=",numofpw)
-print("Number of negative words=",numofnw)
-#print("Positive words are:" + pswords)
-#print("Negative words are:" + ngwords)
+        if text_list_links[i][j] in data:
+            positiveword[i]=positiveword[i]+1
 
-if numofpw>numofnw:
-    print("This is a positive sentiment")
-elif numofpw<numofnw:
-    print("This is a negative sentiment")
-else:
-    print("This is a neutral sentiment")
+        elif text_list_links[i][j] in file1:
+            negativeword[i]=negativeword[i]+1
+
+        else:
+            neutralword[i]=neutralword[i]+1
+
+for k in range(len(text_list_links)):
+        print("Article ",k)
+        print("Positive Words:",positiveword[k],end=" ")
+        print(", Negative Words:",negativeword[k],end=" ")
+        print(", Neutral Words:",neutralword[k])
+        if positiveword[k] > negativeword[k]:
+            print("This is a positive sentiment")
+        elif positiveword[k] < negativeword[k]:
+            print("This is a negative sentiment")
+        else:
+            print("This is a neutral sentiment")
+
+# for l in range(len(text_list_links)):
+#     print("Positive words are:",text_list_links(i),positiveword[l])
+#     print("Negative words are:",text_list_links(i),negativeword[l])
+#     print("Neutral words are:",text_list_links(i),neutralword[l])
+
+# print("Number of positive word=",positiveword)
+# print("Number of negative words=",negativeword)
+# print("Number of neutral words=",neutralword)
+
+
+import plotly.graph_objs as go
+import plotly.offline as ply
+
+x = [i for i in range(len(text_list_links))]
+positive=[y1 for y1 in positiveword]
+negative=[y2 for y2 in negativeword]
+neutral=[y3 for y3 in neutralword]
+
+graph1 = go.Scatter(
+        x=x,
+        y=positive,
+        name='positive'
+    )
+graph2 = go.Scatter(
+        x=x,
+        y=positive,
+        name='positive',
+        mode='markers'
+    )
+
+graph3 = go.Scatter(
+        x=x,
+        y=negative,
+        name='negative'
+    )
+graph4 = go.Scatter(
+        x=x,
+        y=negative,
+        name='negative',
+        mode='markers'
+    )
+graph5 = go.Scatter(
+    x=x,
+    y=neutral,
+    name='neutral'
+)
+graph6 = go.Scatter(
+    x=x,
+    y=neutral,
+    name='neutral',
+    mode='markers'
+)
+data = [graph1, graph2,graph3,graph4,graph5,graph6]
+layout = go.Layout(title={'text': 'Graph Word Count/ stopword vs Article', 'x': 0.5},
+                   xaxis=dict(title='Article'),
+                   yaxis=dict(title='Word Count'))
+fig = dict(data=data, layout=layout)
+name = 'Semantic Analysis ' + str(i) + '.html'
+ply.plot(fig, filename=name)
