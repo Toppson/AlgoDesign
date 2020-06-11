@@ -13,43 +13,14 @@ for i in range(len(dictt_links)):  #21 article
         num=int(dictt_links[i][j])
         y[i]=y[i]+num
 
-    print('x =', x)
-    print('y =', y)
-
-
-graph1 = go.Scatter(
-        x=x,
-        y=y,
-        name='line for word count'
-    )
-graph2 = go.Scatter(
-        x=x,
-        y=y,
-        name='dot for word count',
-        mode='markers'
-    )
-
-graph3 = go.Scatter(
-        x=x,
-        y=y1,
-        name='line for stopword'
-    )
-graph4 = go.Scatter(
-        x=x,
-        y=y1,
-        name='dot for stopword',
-        mode='markers'
-    )
-    # graph3 = go.Histogram(
-    #     x=new,
-    #     name='histogram',
-    #     nbinsx=50
-    # )
-    #graph 3
+graph1 = go.Scatter(x=x,y=y,name='line for word count')
+graph2 = go.Scatter(x=x,y=y,name='dot for word count',mode='markers')
+graph3 = go.Scatter(x=x,y=y1,name='line for stopword')
+graph4 = go.Scatter(x=x,y=y1,name='dot for stopword',mode='markers')
 data = [graph1, graph2,graph3,graph4]
 layout = go.Layout(title={'text': 'Graph Word Count/ stopword vs Article', 'x': 0.5},
                    xaxis=dict(title='Article'),
                    yaxis=dict(title='Word Count / Stop word'))
 fig = dict(data=data, layout=layout)
-name = 'graph ' + str(i) + '.html'
+name = 'Word Count ' + str(i) + '.html'
 ply.plot(fig, filename=name)

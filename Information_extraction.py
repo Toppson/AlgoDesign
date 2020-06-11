@@ -30,8 +30,8 @@ links.append("https://www.lexology.com/library/detail.aspx?g=6bb569f8-3d96-4408-
 links.append("https://www.thestar.com.my/lifestyle/travel/2020/04/20/local-airlines-need-help-from-government-to-survive-post-covid-19-says-matta")#flight2
 links.append("https://www.thestar.com.my/business/business-news/2020/03/18/malaysia-airlines-reduces-operations-following-travel-restrictions") #flight3
 
-
-myurl=urllib.request.urlopen("http://tuxworld.wordpress.com")
+#
+# myurl=urllib.request.urlopen("http://tuxworld.wordpress.com")
 url_links=[]
 for i in range(len(links)):
     url_links.append(urllib.request.urlopen((links[i])))
@@ -57,7 +57,7 @@ for i in range(len(links)):
 # flight_2=urllib.request.urlopen("https://www.thestar.com.my/lifestyle/travel/2020/04/20/local-airlines-need-help-from-government-to-survive-post-covid-19-says-matta")
 # flight_3=urllib.request.urlopen("https://www.thestar.com.my/business/business-news/2020/03/18/malaysia-airlines-reduces-operations-following-travel-restrictions")
 
-html_string=myurl.read()
+# html_string=myurl.read()
 html_string_links=[]
 for i in range(len(links)):
     html_string_links.append(url_links[i].read())
@@ -82,8 +82,8 @@ for i in range(len(links)):
 # html_string_flight1=flight_1.read()
 # html_string_flight2=flight_2.read()
 # html_string_flight3=flight_3.read()
-
-text=bs4.BeautifulSoup(html_string,'html.parser').get_text()
+#
+# text=bs4.BeautifulSoup(html_string,'html.parser').get_text()
 text_links=[]
 for i in range(len(links)):
     text_links.append(bs4.BeautifulSoup(html_string_links[i],'html.parser').get_text())
@@ -109,7 +109,7 @@ for i in range(len(links)):
 # text_flight2=bs4.BeautifulSoup(html_string_flight2,'html.parser').get_text()
 # text_flight3=bs4.BeautifulSoup(html_string_flight3,'html.parser').get_text()
 
-text=text.encode("ascii","ignore")
+# text=text.encode("ascii","ignore")
 for i in range(len(links)):
     text_links[i]=text_links[i].encode("ascii","ignore")
 # text_bus1=text_bus1.encode("ascii","ignore")
@@ -134,7 +134,7 @@ for i in range(len(links)):
 # text_flight2=text_flight2.encode("ascii","ignore")
 # text_flight3=text_flight3.encode("ascii","ignore")
 
-text=text.decode()
+# text=text.decode()
 for i in range(len(links)):
     text_links[i]=text_links[i].decode()
 # text_bus1=text_bus1.decode()
@@ -158,9 +158,9 @@ for i in range(len(links)):
 # text_flight1=text_flight1.decode()
 # text_flight2=text_flight2.decode()
 # text_flight3=text_flight3.decode()
-
-for i in modified_punctuation:
-    text=text.replace(i," ")
+#
+# for i in modified_punctuation:
+#     text=text.replace(i," ")
 
 for i in range(len(links)):
     for j in modified_punctuation:
@@ -168,20 +168,20 @@ for i in range(len(links)):
 
 
 
-text=text.split()
+# text=text.split()
 
 for i in range(len(links)):
     text_links[i] = text_links[i].split()
 
-print("Text: ",text)
-#TO to remove all special characters and left only ascii text
-text_list=[]
-for i in  text:
-    if i not in string.punctuation:
-        text_list.append(i)
+# print("Text: ",text)
+# TO to remove all special characters and left only ascii text
+# text_list=[]
+# for i in  text:
+#     if i not in string.punctuation:
+#         text_list.append(i)
 
 text_list_links=[]
-# text_list_links is nested array
+#  text_list_links is nested array
 for i in range(len(links)):
     text_list_links.append([])
 
@@ -192,20 +192,20 @@ for i in range(len(links)):
 
 
 #TO lowercase all letters
-for i in range(len(text_list)):
-    text_list[i]=text_list[i].lower()
+# for i in range(len(text_list)):
+#     text_list[i]=text_list[i].lower()
 
 for i in range(len(text_list_links)):
     for j in range(len(text_list_links[i])):
         text_list_links[i][j]=text_list_links[i][j].lower()
 
-
-for i in text_list:
-    temp=""
-    for j in i:
-        if j in string.ascii_lowercase:
-            temp=temp+j
-    i=temp
+#
+# for i in text_list:
+#     temp=""
+#     for j in i:
+#         if j in string.ascii_lowercase:
+#             temp=temp+j
+#     i=temp
 
 for i in range(len(text_list_links)):
     for j in text_list_links[i]:
@@ -393,11 +393,11 @@ print("Stopword:", all_stopwords)
 
 #to complete assignment, we use string matching algorithm, in fact binary search would be much faster T(n)= logn
 
-newtext=" "
-for i in text_list:
-    newtext=newtext+i+" "
-print("Text_List: ",text_list)
-print("NEWTEST: ",newtext)
+# newtext=" "
+# for i in text_list:
+#     newtext=newtext+i+" "
+# print("Text_List: ",text_list)
+# print("NEWTEST: ",newtext)
 
 newtext_links=[]
 for i in range (len(text_list_links)):
@@ -456,14 +456,14 @@ def boyer_moore(txt,pat,num):
 
 
 # to compare each stopword to the text
-demo_dictionary_stopwords={}
-for i in all_stopwords:
-    demo_num = 0
-    newtext,num=boyer_moore(newtext,i,demo_num)
-    if demo_num>0:
-        demo_dictionary_stopwords[i]=demo_num
-
-print("Corrected text: ",newtext)
+# demo_dictionary_stopwords={}
+# for i in all_stopwords:
+#     demo_num = 0
+#     newtext,num=boyer_moore(newtext,i,demo_num)
+#     if demo_num>0:
+#         demo_dictionary_stopwords[i]=demo_num
+#
+# print("Corrected text: ",newtext)
 
 dictionary_list_stopwords=[]
 for i in range(len(newtext_links)):
@@ -485,7 +485,7 @@ for i in range(len(dictionary_list_stopwords)):
         sum=sum+dictionary_list_stopwords[i][j]
     total_stopwords.append(sum)
 print("Sum: ",total_stopwords)
-newtext_list=newtext.split()
+# newtext_list=newtext.split()
 
 
 
@@ -494,13 +494,13 @@ newtext_list_links=[]
 for i in range(len(newtext_links)):
     newtext_list_links.append(newtext_links[i].split())
 
-dictt={}
-for i in newtext_list:
-    if i in dictt:
-        dictt[i]=dictt[i]+1
-    else:
-        dictt[i]=1
-print(dictt)
+# dictt={}
+# for i in newtext_list:
+#     if i in dictt:
+#         dictt[i]=dictt[i]+1
+#     else:
+#         dictt[i]=1
+# print(dictt)
 
 dictt_links=[]
 for i in range(len(newtext_list_links)):
@@ -527,3 +527,61 @@ for i in range(len(dictt_links)):
 print("\nBest Time Complexity of Boyer Moore: O(n/m)")
 print("Worst Time Complexity of Boyer Moore: O(mn)")
 print(("In this case, the time complexity would times m"))
+
+#plot
+import plotly.graph_objs as go
+import plotly.offline as ply
+from Information_extraction import dictt_links,total_stopwords
+#words=newtext_list.split()
+
+x = []
+y=[0]*21
+y1=total_stopwords
+
+for i in range(len(dictt_links)):  #21 article
+    x.append(i+1)
+    for j in dictt_links[i].keys():
+        num=int(dictt_links[i][j])
+        y[i]=y[i]+num
+
+    print('x =', x)
+    print('y =', y)
+
+
+graph1 = go.Scatter(
+        x=x,
+        y=y,
+        name='line for word count'
+    )
+graph2 = go.Scatter(
+        x=x,
+        y=y,
+        name='dot for word count',
+        mode='markers'
+    )
+
+graph3 = go.Scatter(
+        x=x,
+        y=y1,
+        name='line for stopword'
+    )
+graph4 = go.Scatter(
+        x=x,
+        y=y1,
+        name='dot for stopword',
+        mode='markers'
+    )
+    # graph3 = go.Histogram(
+    #     x=new,
+    #     name='histogram',
+    #     nbinsx=50
+    # )
+    #graph 3
+data = [graph1, graph2,graph3,graph4]
+layout = go.Layout(title={'text': 'Graph Word Count/ stopword vs Article', 'x': 0.5},
+                   xaxis=dict(title='Article'),
+                   yaxis=dict(title='Word Count / Stop word'))
+fig = dict(data=data, layout=layout)
+name = 'Word Count ' + str(i) + '.html'
+ply.plot(fig, filename=name)
+
