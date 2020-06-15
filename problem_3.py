@@ -1,4 +1,4 @@
-from Semantic Analysis import positiveword,negativeword
+from SemanticAnalysis import positiveword,negativeword
 from Getlocation import distance
 
 #read option pf path
