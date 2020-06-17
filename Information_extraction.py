@@ -26,9 +26,9 @@ links.append("https://www.reuters.com/article/us-grab-competition-malaysia-fine/
 links.append("https://www.thestar.com.my/lifestyle/living/2020/05/01/nobody-is-hailing-taxis-now-woes-struggling-taxi-driver-pall-singh") #taxi1
 links.append("https://www.thestar.com.my/metro/metro-news/2020/04/08/taxi-e-hailing-drivers-at-a-loss") #taxi2
 links.append("https://www.piston.my/2020/04/14/pickngo-taxi-drivers-also-offer-delivery-services/") #taxi3
-links.append("https://www.lexology.com/library/detail.aspx?g=6bb569f8-3d96-4408-a83e-dc62ac24e96f") #flight1
-links.append("https://www.thestar.com.my/lifestyle/travel/2020/04/20/local-airlines-need-help-from-government-to-survive-post-covid-19-says-matta")#flight2
-links.append("https://www.thestar.com.my/business/business-news/2020/03/18/malaysia-airlines-reduces-operations-following-travel-restrictions") #flight3
+links.append("https://www.freemalaysiatoday.com/category/nation/2020/06/11/malaysia-airports-sees-increase-in-local-flights-under-rmco/") #flight1
+links.append("https://www.thestar.com.my/news/nation/2020/06/08/malaysia-airlines-lifting-travel-restrictions-and-reopening-borders-will-allow-loved-ones-to-reunite")#flight2
+links.append("https://www.malaysiaairports.com.my/media-centre/news/latest-updates-new-routes") #flight3
 
 #
 # myurl=urllib.request.urlopen("http://tuxworld.wordpress.com")
@@ -529,59 +529,59 @@ print("Worst Time Complexity of Boyer Moore: O(mn)")
 print(("In this case, the time complexity would times m"))
 
 #plot
-import plotly.graph_objs as go
-import plotly.offline as ply
-from Information_extraction import dictt_links,total_stopwords
-#words=newtext_list.split()
-
-x = []
-y=[0]*21
-y1=total_stopwords
-
-for i in range(len(dictt_links)):  #21 article
-    x.append(i+1)
-    for j in dictt_links[i].keys():
-        num=int(dictt_links[i][j])
-        y[i]=y[i]+num
-
-    print('x =', x)
-    print('y =', y)
-
-
-graph1 = go.Scatter(
-        x=x,
-        y=y,
-        name='line for word count'
-    )
-graph2 = go.Scatter(
-        x=x,
-        y=y,
-        name='dot for word count',
-        mode='markers'
-    )
-
-graph3 = go.Scatter(
-        x=x,
-        y=y1,
-        name='line for stopword'
-    )
-graph4 = go.Scatter(
-        x=x,
-        y=y1,
-        name='dot for stopword',
-        mode='markers'
-    )
-    # graph3 = go.Histogram(
-    #     x=new,
-    #     name='histogram',
-    #     nbinsx=50
-    # )
-    #graph 3
-data = [graph1, graph2,graph3,graph4]
-layout = go.Layout(title={'text': 'Graph Word Count/ stopword vs Article', 'x': 0.5},
-                   xaxis=dict(title='Article'),
-                   yaxis=dict(title='Word Count / Stop word'))
-fig = dict(data=data, layout=layout)
-name = 'Word Count ' + str(i) + '.html'
-ply.plot(fig, filename=name)
-
+# import plotly.graph_objs as go
+# import plotly.offline as ply
+# from Information_extraction import dictt_links,total_stopwords
+# #words=newtext_list.split()
+#
+# x = []
+# y=[0]*21
+# y1=total_stopwords
+#
+# for i in range(len(dictt_links)):  #21 article
+#     x.append(i+1)
+#     for j in dictt_links[i].keys():
+#         num=int(dictt_links[i][j])
+#         y[i]=y[i]+num
+#
+#     print('x =', x)
+#     print('y =', y)
+#
+#
+# graph1 = go.Scatter(
+#         x=x,
+#         y=y,
+#         name='line for word count'
+#     )
+# graph2 = go.Scatter(
+#         x=x,
+#         y=y,
+#         name='dot for word count',
+#         mode='markers'
+#     )
+#
+# graph3 = go.Scatter(
+#         x=x,
+#         y=y1,
+#         name='line for stopword'
+#     )
+# graph4 = go.Scatter(
+#         x=x,
+#         y=y1,
+#         name='dot for stopword',
+#         mode='markers'
+#     )
+#     # graph3 = go.Histogram(
+#     #     x=new,
+#     #     name='histogram',
+#     #     nbinsx=50
+#     # )
+#     #graph 3
+# data = [graph1, graph2,graph3,graph4]
+# layout = go.Layout(title={'text': 'Graph Word Count/ stopword vs Article', 'x': 0.5},
+#                    xaxis=dict(title='Article'),
+#                    yaxis=dict(title='Word Count / Stop word'))
+# fig = dict(data=data, layout=layout)
+# name = 'Word Count ' + str(i) + '.html'
+# ply.plot(fig, filename=name)
+#
