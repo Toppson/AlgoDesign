@@ -80,7 +80,7 @@ for i in range(len(fullcoordinate_distance)):
         To = tempstr[1][1:len(tempstr[1])-1].replace(" ", "")
         distance_between = tempstr[2]
         graph.addDistance(From,To,distance_between)
-print(graph.distanceNode_Node())
+#print(graph.distanceNode_Node())
 
 graph.search()
 best_coor, shortest_distance = graph.shortestPath()
@@ -101,9 +101,8 @@ def minRoute(distance,shortest_distance,route):
         compare = distance[i] - shortest_distance
         if compare > 0 and compare < closest_choose:
             closest_choose = compare
-            road = route[i]
             best = i
-    print("Shortest path =\n", road, "(", shortest_distance, "km )")
+    print("Shortest path =\n", route[best], "(", shortest_distance, "km )")
     data1 = open("options/" + files[best], 'r').read().replace("\n", "")
     strr1 = ' '.join(data1.split())
     strr1 = strr1.replace(" ", "&")
