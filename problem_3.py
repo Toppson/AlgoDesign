@@ -1,9 +1,7 @@
 from SemanticAnalysis import positiveword,negativeword
-from Getlocation import distance
+from Getlocation import distance,files
 
-#read option pf path
-with open('options.txt') as myfile:
-    line = myfile.read().split("\n")
+
 
 
 # distances= ranking of path according to distance in Shortest Path
@@ -13,7 +11,7 @@ distances = [0] * 7
 for i in range(7):
     distances[i] = i
 
-preference = [0] *( len(line)-1)
+preference = [0] *( len(files)-1)
 
 car = 10
 flight = 10
@@ -48,27 +46,26 @@ for i in range(3):
 
 
 #calculate total preference of transportation used in each option
-for i in range(len(line)-1):
-    path = line[i].split(',')
-    temp = 0
-    for j in range(len(path)):
-        if path[j].__contains__('car'):
+for (ind,f) in enumerate (files,1):
+    sub_option=f.split(',')
+    for x in range(len(sub_option)):
+        if str(sub_option[j]).__contains__('car'):
             temp += car
-        elif path[j].__contains__('ferry'):
+        elif str(sub_option[j]).__contains__('ferry'):
             temp += ferry
-        elif path[j].__contains__('bus'):
+        elif str(sub_option[j]).__contains__('bus'):
             temp += bus
-        elif path[j].__contains__('flight'):
+        elif str(sub_option[j]).__contains__('flight'):
             temp += flight
-        elif (path[j].__contains__('komuter') or path[j].__contains__('ets')):
+        elif (str(sub_option[j]).__contains__('komuter') or str(sub_option[j]).__contains__('ets')):
             temp += ktm
-        elif path[j].__contains__('lrt') or path[j].__contains__('ets'):
+        elif str(sub_option[j]).__contains__('lrt') or str(sub_option[j]).__contains__('ets'):
             temp += lrt_mrt
-        elif path[j].__contains__('grab'):
+        elif str(sub_option[j]).__contains__('grab'):
             temp += grab
-        elif path[j].__contains__('taxi'):
+        elif str(sub_option[j]).__contains__('taxi'):
             temp += taxi
-        elif path[j].__contains__('walk'):
+        elif str(sub_option[j]).__contains__('walk'):
             temp += walk
     preference[i] = temp / len(path)
 
@@ -76,10 +73,11 @@ for i in range(len(line)-1):
 #distance = distance of path from Getlocation,sort option accendingly according to distance
 for i in range(len(distances)):
     for j in range(0, len(distances) - 1 - i):
-        if distances[j] > distances[j + 1]:
-            distances[j], distances[j + 1] = distances[j + 1], distances[j]
+        if distance[j] < distance[j + 1]:
+            distances[j],distances[j + 1] =distances[j + 1],distances[j]
+            distance[j], distance[j + 1] = distance[j + 1], distance[j]
             preference[j], preference[j + 1] = preference[j + 1], preference[j]
-            line[j], line[j + 1] = line[j + 1], line[j]
+            files[j], files[j + 1] = files[j + 1], files[j]
 
 # add distances to preference, preference=ranking of path according to distance and preference of article
 for i in range(len(distances)):
@@ -93,14 +91,4 @@ for i in range (len(distances)-1):
     if(preference[i]<preference[i+1]):
         max=i+1
 
-print('the best option is taking',line[max])
-
-
-
-
-
-
-
-
-
-
+print('the best option is taking',files[max])
