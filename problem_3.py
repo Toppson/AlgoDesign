@@ -1,15 +1,14 @@
 from SemanticAnalysis import positiveword,negativeword
-from Getlocation import distance
+from Getlocation import distance,files
 
 #read option pf path
-with open('options.txt') as myfile:
-    line = myfile.read().split("\n")
+line=files.split("\n")
 
 
 
 
 preference = [0] *( len(line)-1)
-
+temp=[0]*( len(line)-1)
 transport=[10]*7
 transport_string=['bus','ferry','lrt and mrt','ktm','grab','taxi','flight']
 
@@ -38,9 +37,6 @@ for i in range(len(transport)):
         print(transport_string[i],'shows negative sentiment')
     else:
         print(transport_string[i],'shows positive sentiment')
-
-
-
 
 
 #calculate total preference of transportation used in each option
@@ -92,6 +88,13 @@ for i in range (len(preference)-1):
 
 
 print('the best option is taking',line[max])
+
+
+
+
+
+
+
 
 
 
