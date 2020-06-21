@@ -1,4 +1,4 @@
-from Semantic Analysis import positiveword,negativeword
+from SemanticAnalysis import positiveword,negativeword
 from Getlocation import distance
 
 #read option pf path
@@ -92,3 +92,6 @@ for i in range (len(preference)-1):
 
 
 print('the best option is taking',line[max])
+
+
+
