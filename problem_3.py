@@ -7,7 +7,7 @@ line=(str(files)).split("\n")
 
 
 
-preference = [0] *( len(line)-1)
+preference = [0] *( len(line))
 temp=[0]*( len(line)-1)
 transport=[10]*7
 transport_string=['bus','ferry','lrt and mrt','ktm','grab','taxi','flight']
@@ -74,7 +74,7 @@ for i, x in enumerate(sorted(range(len(distance)), key=lambda y: distance[y])):
     index[x] = i
 
 #
-for i in range(7):
+for i in range(len(index)):
     preference[i]+=index[i]
 
 
