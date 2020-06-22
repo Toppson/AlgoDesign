@@ -9,33 +9,33 @@ for i in range(len(files)):
 
 preference = [0] *(7)
 
-transport=[10]*7
+transport=[0]*7
 transport_string=['bus','ferry','lrt and mrt','ktm','grab','taxi','flight']
 
-# calculate level of preference for each transportation, if negative then tranportation-=1
+# calculate level of preference for each transportation, if negative then tranportation+=2, 3 negative ,transport=6, 3 positve, transport=0
 for i in range(3):
     if positiveword[i]<negativeword[i]:
-        transport[0]-=1
+        transport[0]+=2
     if positiveword[i+3]<negativeword[i+3]:
-        transport[1]-=1
+        transport[1]+=2
     if positiveword[i+6]<negativeword[i+6]:
-        transport[2]-=1
+        transport[2]+=2
 
     if positiveword[i+9]<negativeword[i+9]:
-        transport[3]-=1
+        transport[3]+=2
 
     if positiveword[i+12] < negativeword[i+12]:
-        transport[4]-=1
+        transport[4]+=2
 
     if positiveword[i+15] < negativeword[i + 15]:
-        transport[5]-=1
+        transport[5]+=2
     if positiveword[i+18] < negativeword[i + 18]:
-        transport[6]-=1
+        transport[6]+=2
 
 for i in range(len(transport)):
-    if transport[i]==7:
+    if transport[i]==4:
         print(transport_string[i],'shows negative sentiment')
-    elif transport[i]==8:
+    elif transport[i]==6:
         print(transport_string[i],'shows negative sentiment')
     else:
         print(transport_string[i],'shows positive sentiment')
@@ -65,7 +65,7 @@ for i in range(len(line)):
         elif path[j].__contains__('flight'):
             temp += transport[6]
         elif path[j].__contains__('walk'):
-            temp += 5
+            temp -=1
     preference[i] = temp / len(path)
 
 
@@ -100,8 +100,8 @@ bestpath=str(line[first])
 bestpath=bestpath.replace('[','').replace(']','').replace('.kml','')
 print('The best path is by:', bestpath)
 print('the distance of the path is:',distance[first])
-print('the preference of the path is:',preference[first])
-print('We choose the path because it is shortest, providing second shortest distance=',distance[second],'and second largest preference=',preference[second])
+print('the negative preference score of the path is:',preference[first])
+print('We choose the path because it is shortest, providing second shortest distance=',distance[second],'and second smallest negative preference score=',preference[second])
 
 
 
