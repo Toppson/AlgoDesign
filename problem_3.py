@@ -65,7 +65,7 @@ for i in range(len(line)):
         elif path[j].__contains__('flight'):
             temp += transport[6]
         elif path[j].__contains__('walk'):
-            temp +=3
+            temp +=7
     preference[i] = temp / len(path)
 
 
