@@ -16,12 +16,10 @@ gmap = gmplot.GoogleMapPlotter(4.144082, 101.081438, 8)
 gmap.apikey='AIzaSyB-T4FGL-A6zZ_p6lbNgD4eHtjnV9b44a0'
 gmap1= gmplot.GoogleMapPlotter(4.144082, 101.081438, 8)
 gmap1.apikey='AIzaSyB-T4FGL-A6zZ_p6lbNgD4eHtjnV9b44a0'
-gmap2= gmplot.GoogleMapPlotter(4.144082, 101.081438, 8)
+gmap2= gmplot.GoogleMapPlotter(4.144082, 101.081438, 8) #central point
 gmap2.apikey='AIzaSyB-T4FGL-A6zZ_p6lbNgD4eHtjnV9b44a0'
 
-
 route=[]
-
 
 strr = ""
 count=0;
@@ -29,7 +27,6 @@ distance=[]
 fullcoordinate_distance = []
 fullcoordinate = []
 for ls in files:
-
     data = open("options/" + ls, 'r').read().replace("\n", "")
     strr = ' '.join(data.split())
     strr = strr.replace(" ", "&")
