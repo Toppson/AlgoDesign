@@ -7,7 +7,7 @@ for i in range(len(files)):
     line.append(files[i].split('n'))
 
 
-preference = [0] *( len(line))
+preference = [0] *(7)
 
 transport=[10]*7
 transport_string=['bus','ferry','lrt and mrt','ktm','grab','taxi','flight']
