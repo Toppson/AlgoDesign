@@ -90,7 +90,7 @@ for i in range (len(preference)):
         first_value = preference[i]
         first = i
     # if if current preference([i]) is bigger than second,second=preference[i]
-    elif (second_value < preference[i] and preference[i] != first_value):
+    elif (second_value > preference[i] and preference[i] != first_value):
         second = i
         second_value = preference[i]
 
