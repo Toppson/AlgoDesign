@@ -43,7 +43,8 @@ for i in range(len(transport)):
 
 #calculate total preference of transportation used in each option
 for i in range(len(line)):
-    path = line[i].split(',')
+    lines=str(line[i])
+    path = lines.split(',')
     temp = 0
     for j in range(len(path)):
         if path[j].__contains__('bus'):
