@@ -107,65 +107,25 @@ print("Worst Time Complexity of KMP: O(mn)")
 print(("In this case, the time complexity would times m+n"))
 
 #plot
-
-import matplotlib.pyplot as plt
 neutral=[i for i in neutralword]
 positive=[j for j in positiveword]
 negative=[k for k in negativeword]
 x=[]
 for i in range(len(text_list_links)):
-    x.append(('article ' + str(i)))
-
-plt.plot(x,neutral,'b')
-plt.plot(x,positive,'g')
-plt.plot(x,negative,'r')
-plt.title("Semantic Analysis")
-plt.xlabel('Article')
-plt.ylabel('Frequency')
-plt.legend(loc='upper right')
-plt.show()
-
+    x.append((i))
 
 import plotly.graph_objs as go
 import plotly.offline as ply
-graph1 = go.Scatter(
-        x=x,
-        y=positive,
-        name='positive'
-    )
-graph2 = go.Scatter(
-        x=x,
-        y=positive,
-        name='positive',
-        mode='markers'
-    )
+graph1 = go.Scatter(x=x,y=positive,name='positive')
+graph2 = go.Scatter(x=x,y=positive,name='positive',mode='markers')
+graph3 = go.Scatter(x=x,y=negative,name='negative')
+graph4 = go.Scatter(x=x,y=negative,name='negative',mode='markers')
+graph5 = go.Scatter(x=x,y=neutral,name='neutral')
+graph6 = go.Scatter(x=x,y=neutral,name='neutral',mode='markers')
 
-graph3 = go.Scatter(
-        x=x,
-        y=negative,
-        name='negative'
-    )
-graph4 = go.Scatter(
-        x=x,
-        y=negative,
-        name='negative',
-        mode='markers'
-    )
-graph5 = go.Scatter(
-    x=x,
-    y=neutral,
-    name='neutral'
-)
-graph6 = go.Scatter(
-    x=x,
-    y=neutral,
-    name='neutral',
-    mode='markers'
-)
 data = [graph1, graph2,graph3,graph4,graph5,graph6]
-layout = go.Layout(title={'text': 'Graph Word Count/ stopword vs Article', 'x': 0.5},
+layout = go.Layout(title={'text': 'Semantic Analysis', 'x': 0.5},
                    xaxis=dict(title='Article'),
                    yaxis=dict(title='Word Count'))
 fig = dict(data=data, layout=layout)
-name = 'Semantic Analysis ' + str(i) + '.html'
-ply.plot(fig, filename=name)
+ply.plot(fig, filename='Semantic Analysis.html')
