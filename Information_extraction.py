@@ -3,6 +3,8 @@ import urllib.request
 import bs4
 import string
 import re
+import nltk
+nltk.download('stopwords')
 
 modified_punctuation=string.punctuation
 modified_punctuation=modified_punctuation.replace('\'','')

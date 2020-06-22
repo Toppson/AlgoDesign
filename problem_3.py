@@ -2,7 +2,7 @@ from SemanticAnalysis import positiveword,negativeword
 from Getlocation import distance,files
 
 #read option pf path
-line=files.split("\n")
+line=(str(files)).split("\n")
 
 
 
