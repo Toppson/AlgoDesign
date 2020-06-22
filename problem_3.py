@@ -2,13 +2,13 @@ from SemanticAnalysis import positiveword,negativeword
 from Getlocation import distance,files
 
 #read option pf path
-line=(str(files)).split("\n")
-
-
+line=[]
+for i in range(len(files)):
+    line.append(files[i].split('n'))
 
 
 preference = [0] *( len(line))
-temp=[0]*( len(line)-1)
+
 transport=[10]*7
 transport_string=['bus','ferry','lrt and mrt','ktm','grab','taxi','flight']
 
@@ -42,7 +42,7 @@ for i in range(len(transport)):
 
 
 #calculate total preference of transportation used in each option
-for i in range(len(line)-1):
+for i in range(len(line)):
     path = line[i].split(',')
     temp = 0
     for j in range(len(path)):
@@ -69,7 +69,7 @@ for i in range(len(line)-1):
 
 
 #index=rank of path according to distance,shorter distance=lowest mark
-index=[0]*len(distance)
+index=[0]*len(line)
 for i, x in enumerate(sorted(range(len(distance)), key=lambda y: distance[y])):
     index[x] = i
 

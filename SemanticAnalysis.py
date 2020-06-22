@@ -36,7 +36,7 @@ new_list=[]
 
 for i in text_list_links:
     str1=" "
-    print(i)
+
     for j in i:
         str1=str1+j+" "
     new_list.append(str1)
