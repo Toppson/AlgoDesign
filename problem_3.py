@@ -78,13 +78,13 @@ for i, x in enumerate(sorted(range(len(distance)), key=lambda y: distance[y])):
 for i in range(len(index)):
     preference[i]+=index[i]
 
-# first and second is the index of first and second largest preference
+# first and second is the index of first and second smallest preference
 #first_value and second_value is their value
 first=second =0
-first_value=second_value=-2147483648
+first_value=second_value=2147483648
 for i in range (len(preference)):
     #if current preference([i]) is bigger than first, first = preference[i], second =first
-    if (preference[i] > first_value):
+    if (preference[i] < first_value):
         second = first
         second_value = first_value
         first_value = preference[i]
