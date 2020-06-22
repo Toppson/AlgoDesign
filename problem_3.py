@@ -4,7 +4,7 @@ from Getlocation import distance,files
 #read option pf path
 line=[]
 for i in range(len(files)):
-    line.append(files[i].split('n'))
+    line.append(files[i].split('\n'))
 
 
 preference = [0] *(7)
