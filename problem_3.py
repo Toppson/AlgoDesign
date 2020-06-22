@@ -35,6 +35,8 @@ for i in range(3):
 for i in range(len(transport)):
     if transport[i]==7:
         print(transport_string[i],'shows negative sentiment')
+    elif transport[i]==8:
+        print(transport_string[i],'shows negative sentiment')
     else:
         print(transport_string[i],'shows positive sentiment')
 
