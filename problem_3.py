@@ -80,7 +80,7 @@ for i in range(len(index)):
 
 max_value=preference[0]
 max=0
-for i in range (len(preference)-1):
+for i in range (len(preference)):
 
     if(preference[i]<max_value):
         max=i
