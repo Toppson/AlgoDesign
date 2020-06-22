@@ -78,21 +78,30 @@ for i, x in enumerate(sorted(range(len(distance)), key=lambda y: distance[y])):
 for i in range(len(index)):
     preference[i]+=index[i]
 
-
-max_value=preference[0]
-max=0
+# first and second is the index of first and second largest preference
+#first_value and second_value is their value
+first=second =0
+first_value=second_value=-2147483648
 for i in range (len(preference)):
+    #if current preference([i]) is bigger than first, first = preference[i], second =first
+    if (preference[i] > first_value):
+        second = first
+        second_value = first_value
+        first_value = preference[i]
+        first = i
+    # if if current preference([i]) is bigger than second,second=preference[i]
+    elif (second_value < preference[i] and preference[i] != first_value):
+        second = i
+        second_value = preference[i]
 
-    if(preference[i]<max_value):
-        max=i
-        max_value=preference[i]
 
-
-
-
-print('the best option is taking',line[max])
-
-
+# print best path
+bestpath=str(line[first])
+bestpath=bestpath.replace('[','').replace(']','').replace('.kml','')
+print('The best path is by:', bestpath)
+print('the distance of the path is:',distance[first])
+print('the preference of the path is:',preference[first])
+print('We choose the path because it is shortest, providing second shortest distance=',distance[second],'and second largest preference=',preference[second])
 
 
 
