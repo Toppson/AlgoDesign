@@ -34,11 +34,13 @@ for i in range(3):
 
 for i in range(len(transport)):
     if transport[i]==4:
-        print(transport_string[i],'shows negative sentiment')
+        print(transport_string[i],'shows negative sentiment(2 out of 3 article shows negative sentiment)')
     elif transport[i]==6:
-        print(transport_string[i],'shows negative sentiment')
+        print(transport_string[i],'shows negative sentiment(3 out of 3 article shows negative sentiment)')
+    elif transport[i]==2:
+        print(transport_string[i], 'shows positive sentiment(3 out of 3 article shows negative sentiment)')
     else:
-        print(transport_string[i],'shows positive sentiment')
+        print(transport_string[i],'shows positive sentiment(no article shows negative sentiment)')
 
 
 #calculate total preference of transportation used in each option
