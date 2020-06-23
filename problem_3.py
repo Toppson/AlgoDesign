@@ -38,7 +38,7 @@ for i in range(len(transport)):
     elif transport[i]==6:
         print(transport_string[i],'shows negative sentiment(3 out of 3 article shows negative sentiment)')
     elif transport[i]==2:
-        print(transport_string[i], 'shows positive sentiment(3 out of 3 article shows negative sentiment)')
+        print(transport_string[i], 'shows positive sentiment(1 out of 3 article shows negative sentiment)')
     else:
         print(transport_string[i],'shows positive sentiment(no article shows negative sentiment)')
 
